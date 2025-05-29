@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4067461566168034913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6146313963623703579}
+  - component: {fileID: 1385791646665550537}
+  - component: {fileID: 2698268347497084109}
+  - component: {fileID: 5827033231484964201}
+  m_Layer: 5
+  m_Name: Die
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6146313963623703579
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067461566168034913}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.013805799, y: 0.013805799, z: 0.013805799}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2, y: 0}
+  m_SizeDelta: {x: 175, y: 175}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1385791646665550537
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067461566168034913}
+  m_CullTransparentMesh: 1
+--- !u!114 &2698268347497084109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067461566168034913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -8182878955398916662, guid: 2786fa598da1b4644b6229ace2d313ca, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5827033231484964201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067461566168034913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6241a2e40287b8f4b9996282e1f84903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieImage: {fileID: 2698268347497084109}
+  selectionOverlay: {fileID: 0}
+  dieValueText: {fileID: 0}
+  selectedColor: {r: 1, g: 1, b: 0, a: 1}
+  deselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedScale: 1.1
+  deselectedScale: 1
+  animationDuration: 0.2
+  rollAnimationDuration: 1
+  spriteChangeInterval: 0.03
+  rotationSpeed: 1000
+  rollingScale: 1.2
+  allDieFaceSprites:
+  - {fileID: 2706872196079119373, guid: 67cd1ee1bf4648d4182c61ff857a384b, type: 3}
+  - {fileID: 2091763668491180885, guid: e866c584d01d5c44db6a2327f79b96ce, type: 3}
+  - {fileID: -8182878955398916662, guid: 2786fa598da1b4644b6229ace2d313ca, type: 3}
+  - {fileID: -8492048405695327441, guid: c8aff7e3f35f7e047ae68f8b3b61b2b1, type: 3}
+  - {fileID: 9112434051699196515, guid: 685115dc33c863e42b4120d43f0dc2d8, type: 3}
+  - {fileID: -6227111948342097440, guid: 03483aeaeb6d3844fadcd0c379a5629b, type: 3}
+  onDieClicked:
+    m_PersistentCalls:
+      m_Calls: []
