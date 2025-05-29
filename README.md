@@ -42,7 +42,7 @@ Assets/
 ## Getting Started
 
 ### Prerequisites
-- Unity 2022.3 LTS or later
+- Unity 6 or later
 - Git for version control
 
 ### Setup
@@ -80,7 +80,7 @@ The project includes test utilities in `Assets/Scripts/Testing/` for validating:
 
 ## Built With
 
-- **Unity 2022.3 LTS** - Game engine
+- **Unity 6** - Game engine
 - **C#** - Programming language
 - **Unity UI** - User interface system
 - **Unity Events** - Event system for decoupled architecture
