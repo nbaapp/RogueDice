@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8182878955398916662, guid: 2786fa598da1b4644b6229ace2d313ca, type: 3}
+  m_Sprite: {fileID: -8182878955398916662, guid: ed301de5d65aa70489776e6ade65e040, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -101,12 +101,12 @@ MonoBehaviour:
   rotationSpeed: 1000
   rollingScale: 1.2
   allDieFaceSprites:
-  - {fileID: 2706872196079119373, guid: 67cd1ee1bf4648d4182c61ff857a384b, type: 3}
-  - {fileID: 2091763668491180885, guid: e866c584d01d5c44db6a2327f79b96ce, type: 3}
-  - {fileID: -8182878955398916662, guid: 2786fa598da1b4644b6229ace2d313ca, type: 3}
-  - {fileID: -8492048405695327441, guid: c8aff7e3f35f7e047ae68f8b3b61b2b1, type: 3}
-  - {fileID: 9112434051699196515, guid: 685115dc33c863e42b4120d43f0dc2d8, type: 3}
-  - {fileID: -6227111948342097440, guid: 03483aeaeb6d3844fadcd0c379a5629b, type: 3}
+  - {fileID: 2706872196079119373, guid: ae46b9ee525beff4a99720a6567da636, type: 3}
+  - {fileID: 2091763668491180885, guid: 92484a24b2ef9c647bedb22d755bcedc, type: 3}
+  - {fileID: -8182878955398916662, guid: ed301de5d65aa70489776e6ade65e040, type: 3}
+  - {fileID: -8492048405695327441, guid: 68373e438fa09d848b40fde800a9e52a, type: 3}
+  - {fileID: 9112434051699196515, guid: 41027a6304c2f6541afde2ac543523b8, type: 3}
+  - {fileID: -6227111948342097440, guid: 59fb272acf5ace04488d4986d1dbe3a2, type: 3}
   onDieClicked:
     m_PersistentCalls:
       m_Calls: []

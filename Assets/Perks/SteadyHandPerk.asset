@@ -15,5 +15,5 @@ MonoBehaviour:
   perkName: Steady Hand
   description: If your dice are within 1 point of each other, you gain 3 bonus points
     for that roll.
-  icon: {fileID: 0}
+  perkImage: {fileID: 2225225228937129809, guid: a246f1f746ddaad4388355f5d9a0cf9a, type: 3}
   rarity: 0

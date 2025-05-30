@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Lucky 7
   description: If your dice add up to 7, your score for that roll is doubled.
-  icon: {fileID: 0}
+  perkImage: {fileID: -4190190660009991265, guid: 9a194a764ee757e4e8bb721d92160106, type: 3}
   rarity: 0

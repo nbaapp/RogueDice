@@ -35,9 +35,7 @@ public class UIManager : MonoBehaviour
     [Tooltip("Button to reroll selected dice.")]
     [SerializeField] private Button rerollButton;
     [Tooltip("Text to display remaining rerolls.")]
-    [SerializeField] private TextMeshProUGUI rerollsText;
-
-    [Header("Perks Display")]
+    [SerializeField] private TextMeshProUGUI rerollsText;    [Header("Perks Display")]
     [Tooltip("Panel or container for displaying current player perks.")]
     [SerializeField] private GameObject perksPanel;
     
@@ -58,9 +56,7 @@ public class UIManager : MonoBehaviour
         {
             int perkCount = perks != null ? perks.Length : 0;
             perksText.text = $"Active Perks: {perkCount}";
-        }
-
-        // Update perk cards if available
+        }        // Update perk cards if available
         if (perkDisplayCards != null)
         {
             for (int i = 0; i < perkDisplayCards.Length; i++)
@@ -71,21 +67,33 @@ public class UIManager : MonoBehaviour
                     {
                         perkDisplayCards[i].Setup(perks[i]);
                         perkDisplayCards[i].gameObject.SetActive(true);
+                        
+                        // Enable dragging for active perk cards (allow reordering)
+                        perkDisplayCards[i].SetDraggable(true);
                     }
                     else
                     {
                         perkDisplayCards[i].gameObject.SetActive(false);
+                        
+                        // Disable dragging for inactive cards
+                        perkDisplayCards[i].SetDraggable(false);
                     }
                 }
             }
-        }
-
-        // Show/hide perks panel based on whether player has perks
+        }// Show/hide perks panel based on whether player has perks
         if (perksPanel != null)
         {
             bool hasPerks = perks != null && perks.Length > 0;
             perksPanel.SetActive(hasPerks);
         }
+    }
+
+    /// <summary>
+    /// Get the array of perk display cards for external systems (like reordering).
+    /// </summary>
+    public PerkCardUI[] GetPerkDisplayCards()
+    {
+        return perkDisplayCards;
     }
 
     /// <summary>
@@ -519,12 +527,10 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("[UIManager] OnGameEnd called.");
         ShowGameOver(true);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    }    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Initialize UI components as needed
     }
 
     // Update is called once per frame
@@ -561,8 +567,7 @@ public class UIManager : MonoBehaviour
         Debug.Log($"[UIManager] Waiting for dice rolling to complete before setting interactable to: {targetInteractable}");
         
         // Wait for all dice to finish rolling
-        while (AnyDiceRolling())
-        {
+        while (AnyDiceRolling())        {
             yield return new WaitForSeconds(0.1f); // Check every 0.1 seconds
         }
         

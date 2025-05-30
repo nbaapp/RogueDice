@@ -20,10 +20,8 @@ public abstract class Perk : ScriptableObject
 
     [Tooltip("A description of the perk's effect.")]
     [TextArea]
-    public string description;
-
-    [Tooltip("Icon to represent this perk in the UI.")]
-    public Sprite icon;
+    public string description;    [Tooltip("Complete perk image to display in the UI (replaces both icon and background).")]
+    public Sprite perkImage;
 
     [Tooltip("The rarity of this perk.")]
     public Rarity rarity;

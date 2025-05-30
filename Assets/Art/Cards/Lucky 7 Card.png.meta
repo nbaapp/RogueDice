@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 685115dc33c863e42b4120d43f0dc2d8
+guid: 9a194a764ee757e4e8bb721d92160106
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9112434051699196515
-    second: Die5_0
+      213: -4190190660009991265
+    second: Lucky 7 Card_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Die5_0
+      name: Lucky 7 Card_0
       rect:
         serializedVersion: 2
-        x: 306
-        y: 146
-        width: 188
-        height: 188
+        x: 450
+        y: 113
+        width: 610
+        height: 854
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 36244b28d7ed57e70800000000000000
-      internalID: 9112434051699196515
+      spriteID: f93e1f89bc379d5c0800000000000000
+      internalID: -4190190660009991265
       vertices: []
       indices: 
       edges: []

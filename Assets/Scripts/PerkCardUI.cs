@@ -4,40 +4,33 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 /// <summary>
-/// UI component for displaying a perk card. Handles setup of perk data and hover interactions.
-/// Can also handle click events for selection.
+/// UI component for displaying a perk card. Handles setup of perk data, hover interactions,
+/// and drag-and-drop reordering functionality.
 /// </summary>
-public class PerkCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class PerkCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [Header("UI References")]
     [Tooltip("Text component to display the perk's name.")]
     public TextMeshProUGUI perkNameText;
 
     [Tooltip("Text component to display the perk's description.")]
-    public TextMeshProUGUI perkDescriptionText;
+    public TextMeshProUGUI perkDescriptionText;    [Tooltip("Image component to display the complete perk image.")]
+    public Image perkImageDisplay;
 
-    [Tooltip("Image component to display the perk's icon.")]
-    public Image perkIcon;
-
-    [Tooltip("Optional background image that can change color based on rarity.")]
+    [Tooltip("Optional background image (deprecated - now using perkImage for complete card).")]
     public Image backgroundImage;
 
     [Header("Hover Panel")]
     [Tooltip("Description panel that appears on hover. Should be hidden by default.")]
-    public GameObject descriptionPanel;
-
-    [Header("Rarity Colors")]
-    [Tooltip("Color for Common rarity perks.")]
-    public Color commonColor = Color.white;
-
-    [Tooltip("Color for Uncommon rarity perks.")]
-    public Color uncommonColor = Color.green;
-
-    [Tooltip("Color for Rare rarity perks.")]
-    public Color rareColor = Color.blue;
+    public GameObject descriptionPanel;    [Header("Drag Settings")]
+    [Tooltip("Whether this perk card can be dragged for reordering.")]
+    public bool isDraggable = false;
 
     // Store reference to the perk data
     private Perk currentPerk;
+    
+    // Drag functionality
+    private bool isDragging = false;
 
     /// <summary>
     /// Sets up the perk card UI with data from a Perk ScriptableObject.
@@ -59,27 +52,16 @@ public class PerkCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         // Set perk description
         if (perkDescriptionText != null)
-            perkDescriptionText.text = perk.description;
+            perkDescriptionText.text = perk.description;        // Set the complete perk image
+        if (perkImageDisplay != null && perk.perkImage != null)
+            perkImageDisplay.sprite = perk.perkImage;
 
-        // Set perk icon
-        if (perkIcon != null && perk.icon != null)
-            perkIcon.sprite = perk.icon;
-
-        // Set background color based on rarity
+        // Note: Background color changing is now deprecated since we use complete perk images
+        // The backgroundImage can still be used for additional UI elements if needed
         if (backgroundImage != null)
         {
-            switch (perk.rarity)
-            {
-                case Rarity.Common:
-                    backgroundImage.color = commonColor;
-                    break;
-                case Rarity.Uncommon:
-                    backgroundImage.color = uncommonColor;
-                    break;
-                case Rarity.Rare:
-                    backgroundImage.color = rareColor;
-                    break;
-            }
+            // Set to white/transparent to not interfere with the perk image
+            backgroundImage.color = Color.white;
         }
 
         // Ensure description panel is hidden by default
@@ -129,12 +111,110 @@ public class PerkCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public Perk GetCurrentPerk()
     {
         return currentPerk;
-    }
-
-    void Start()
+    }    void Start()
     {
         // Ensure description panel is hidden on start
         if (descriptionPanel != null)
             descriptionPanel.SetActive(false);
+    }
+
+    // Drag and Drop Event Handlers    /// <summary>
+    /// Called when the user starts dragging this perk card.
+    /// </summary>
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (!isDraggable) return;
+        
+        isDragging = true;
+        
+        // Hide description panel during drag
+        if (descriptionPanel != null)
+            descriptionPanel.SetActive(false);
+        
+        // Find and notify the reorder manager using reflection to avoid circular reference
+        var allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        foreach (var component in allComponents)
+        {
+            if (component.GetType().Name == "PerkReorderManager")
+            {
+                // Use reflection to call StartDragging method
+                var method = component.GetType().GetMethod("StartDragging");
+                if (method != null)
+                {
+                    method.Invoke(component, new object[] { this });
+                }
+                break;
+            }
+        }
+        
+        Debug.Log($"[PerkCardUI] Started dragging: {currentPerk?.perkName}");
+    }    /// <summary>
+    /// Called continuously while the user is dragging this perk card.
+    /// </summary>
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!isDraggable || !isDragging) return;
+        
+        // Find and notify the reorder manager using reflection to avoid circular reference
+        var allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        foreach (var component in allComponents)
+        {
+            if (component.GetType().Name == "PerkReorderManager")
+            {
+                // Use reflection to call UpdateDragging method
+                var method = component.GetType().GetMethod("UpdateDragging");
+                if (method != null)
+                {
+                    // Convert Vector2 to Vector3 for the method call
+                    Vector3 mousePosition = new Vector3(eventData.position.x, eventData.position.y, 0f);
+                    method.Invoke(component, new object[] { mousePosition });
+                }
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Called when the user stops dragging this perk card.
+    /// </summary>
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!isDraggable) return;
+        
+        isDragging = false;
+        
+        // Find and notify the reorder manager using reflection to avoid circular reference
+        var allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        foreach (var component in allComponents)
+        {
+            if (component.GetType().Name == "PerkReorderManager")
+            {
+                // Use reflection to call StopDragging method
+                var method = component.GetType().GetMethod("StopDragging");
+                if (method != null)
+                {
+                    method.Invoke(component, new object[] { });
+                }
+                break;
+            }
+        }
+        
+        Debug.Log($"[PerkCardUI] Stopped dragging: {currentPerk?.perkName}");
+    }
+
+    /// <summary>
+    /// Check if this card is currently being dragged.
+    /// </summary>
+    public bool IsDragging()
+    {
+        return isDragging;
+    }
+
+    /// <summary>
+    /// Enable or disable drag functionality for this card.
+    /// </summary>
+    public void SetDraggable(bool draggable)
+    {
+        isDraggable = draggable;
     }
 }
